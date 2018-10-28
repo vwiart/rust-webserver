@@ -4,10 +4,10 @@ use hyper::rt::Future;
 use hyper::service::service_fn_ok;
 use hyper::{Body, Request, Response, Server};
 
-const PHRASE: &str = "Hello, World!";
+const HTML: &str = "<html><body>test</body></html>";
 
 fn hello_world(_req: Request<Body>) -> Response<Body> {
-    Response::new(Body::from(PHRASE))
+    Response::new(Body::from(HTML))
 }
 
 fn main() {
