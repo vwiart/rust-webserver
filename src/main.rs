@@ -3,11 +3,15 @@ extern crate hyper;
 use hyper::rt::Future;
 use hyper::service::service_fn_ok;
 use hyper::{Body, Request, Response, Server};
-
-const HTML: &str = "<html><body>test</body></html>";
+use std::fs::File;
+use std::io::prelude::*;
 
 fn hello_world(_req: Request<Body>) -> Response<Body> {
-    Response::new(Body::from(HTML))
+    let mut f = File::open("./static/index.html").expect("File not found");
+    let mut buffer = String::new();
+    f.read_to_string(&mut buffer)
+        .expect("something went wrong reading the file");
+    Response::new(Body::from(buffer))
 }
 
 fn main() {
